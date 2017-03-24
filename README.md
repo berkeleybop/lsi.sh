@@ -13,7 +13,7 @@ Calomel.org
 description: MegaCLI script to configure and monitor LSI raid cards.
 ```
 
-Building on the shoulder of giants. I have added a little
+Building on the shoulder of giants, I have added a little
 "autoconfiguration", pathing for the default Ubuntu package, and a
 couple small additions to their script to make dealing with an LSI
 RAID system a little easier.
