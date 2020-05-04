@@ -158,7 +158,10 @@ fi
 if [ $1 = "progress" ]
 then
     DRIVE=`$MegaCli -PDlist -aALL -NoLog | egrep 'Slot|state' | awk '/Slot/{if (x)print x;x="";}{x=(!x)?$0:x" -"$0;}END{print x;}' | sed 's/Firmware state://g' | egrep build | awk '{print $3}'`
-    $MegaCli -PDRbld -ShowProg -PhysDrv [$ENCLOSURE:$DRIVE] -a0 -NoLog
+    for drive in $DRIVE
+    do
+    	$MegaCli -PDRbld -ShowProg -PhysDrv [$ENCLOSURE:$drive] -a0 -NoLog
+    done
     exit
 fi
 
