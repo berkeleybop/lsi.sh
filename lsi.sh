@@ -1,4 +1,5 @@
 #!/bin/bash
+# https://github.com/berkeleybop/lsi.sh
 #
 # Calomel.org 
 #     https://calomel.org/megacli_lsi_commands.html
@@ -8,11 +9,17 @@
 # description: MegaCLI script to configure and monitor LSI raid cards.
 
 # Full path to the MegaRaid CLI binary
-MegaCli="/usr/sbin/megacli"
+# Check the common install paths, preferng /opt/MegaRAID
+DETECT_MEGACLI="/opt/MegaRAID/MegaCli/MegaCli64"
+if !([ -f "${DETECT_MEGACLI}" ] && [ -r "${DETECT_MEGACLI}" ] && [ -x "${DETECT_MEGACLI}" ]) ; then
+    DETECT_MEGACLI="/usr/sbin/megacli"
+fi
+MegaCli="${MEGACLI:-$DETECT_MEGACLI}"
 
 # The identifying number of the enclosure. Default for our systems is "8". Use
 # "sudo megacli -PDlist -a0 | grep "Enclosure Device" | uniq | awk '{print $NF}'" to see what your number is and set this variable.
-ENCLOSURE=`$MegaCli -PDlist -a0 | grep "Enclosure Device" | uniq | awk '{print $NF}'`
+DETECT_ENCLOSURE=`$MegaCli -PDlist -a0 | grep "Enclosure Device" | uniq | awk '{print $NF}'`
+ENCLOSURE="${ENCLOSURE:-$DETECT_ENCLOSURE}"
 
 if [ $# -eq 0 ]
    then
@@ -20,6 +27,7 @@ if [ $# -eq 0 ]
     echo "            OBPG  .:.  lsi.sh $arg1 $arg2"
     echo "-----------------------------------------------------"
     echo "VARIABLES:"
+    echo "megacli       = $MegaCli"
     echo "enclosure     = $ENCLOSURE"
     echo "COMMANDS:"
     echo "status        = Status of Virtual drives (volumes)"

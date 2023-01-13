@@ -20,6 +20,13 @@ RAID system a little easier.
 
 I'm hoping by putting this out there to encourage further development and extensions to try and bring `MegaCLI` under control.
 
+You can specify the MegaCLI path and enclosure by setting the following environment variables:
+
+| EnvVar Name | Default     | Description |
+| ----------- | ----------- | ----------- |
+| MEGACLI     | `/opt/MegaRAID/MegaCli/MegaCli64` if detected, else `/usr/sbin/megacli` | Full path to MegaCLI binary |
+| ENCLOSURE   | Detected by `lsi.sh` | Enclosure number to scan |
+
 # Environment
 
 I'm working under an Ubuntu/Debian environment, but I think the only
