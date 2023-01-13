@@ -12,7 +12,7 @@ MegaCli="/usr/sbin/megacli"
 
 # The identifying number of the enclosure. Default for our systems is "8". Use
 # "sudo megacli -PDlist -a0 | grep "Enclosure Device" | uniq | awk '{print $NF}'" to see what your number is and set this variable.
-ENCLOSURE=`megacli -PDlist -a0 | grep "Enclosure Device" | uniq | awk '{print $NF}'`
+ENCLOSURE=`$MegaCli -PDlist -a0 | grep "Enclosure Device" | uniq | awk '{print $NF}'`
 
 if [ $# -eq 0 ]
    then
